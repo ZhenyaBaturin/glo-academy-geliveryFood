@@ -8,7 +8,9 @@ close.addEventListener("click", toggleModal);
 function toggleModal() {
   modal.classList.toggle("is-open");
 };
+
 //day 1
+
 const buttonAuth = document.querySelector('.button-auth'),
   modalAuth = document.querySelector('.modal-auth'),
   closeAuth = document.querySelector('.close-auth'),
@@ -49,20 +51,25 @@ function notauthorized() {
 
   function logIn(event) {
     event.preventDefault(); // не понимаю
-    //в let логин будет присваиваться то что будет введено в строке логин 
-    login = loginImput.value;
-    // для того что бы сохранитть логин и находиться на странице до выхода нужно логин добавит в локалсторэдж
-    // она находится в консоле в вкладке аппликайшен
-    // после мы ее ставим в переменную локал
-    localStorage.setItem('gloDelivery', login)
-    toogleModalAuth();
-    //обработка событий
-    buttonAuth.removeEventListener('click', toogleModalAuth);
-    closeAuth.removeEventListener('click', toogleModalAuth);
-    logInForm.removeEventListener('submit', logIn);
-    //сбрасывает в логине имя
-    logInForm.reset();
-    checkAuth();
+    if (loginImput.value) {
+      //в let логин будет присваиваться то что будет введено в строке логин 
+      login = loginImput.value;
+      // для того что бы сохранитть логин и находиться на странице до выхода нужно логин добавит в локалсторэдж
+      // она находится в консоле в вкладке аппликайшен
+      // после мы ее ставим в переменную локал
+      localStorage.setItem('gloDelivery', login)
+      toogleModalAuth();
+      //обработка событий
+      buttonAuth.removeEventListener('click', toogleModalAuth);
+      closeAuth.removeEventListener('click', toogleModalAuth);
+      logInForm.removeEventListener('submit', logIn);
+      //сбрасывает в логине имя
+      logInForm.reset();
+      checkAuth();
+    } else {
+      alert('Введите пароль ');
+    }
+
   }
   //обработка событий
   buttonAuth.addEventListener('click', toogleModalAuth);
@@ -75,6 +82,7 @@ function checkAuth() {
   if (login) {
     authorized();
   } else {
+
     notauthorized();
   }
 }
